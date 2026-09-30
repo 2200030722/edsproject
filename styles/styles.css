@@ -12,32 +12,40 @@
 
 :root {
   /* colors */
-  --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  --background-color: #fbf7ef;
+  --surface-color: #fffdf8;
+  --light-color: #f2e7d5;
+  --dark-color: #472b2c;
+  --text-color: #382f2b;
+  --heading-color: #572b32;
+  --muted-text-color: #71645a;
+  --link-color: #87451f;
+  --link-hover-color: #5b2c31;
+  --accent-color: #986321;
+  --accent-light-color: #dfbd7d;
+  --border-color: #dfd3c2;
+  --footer-color: #392729;
+  --footer-text-color: #f8f0e3;
 
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --heading-font-family: georgia, 'Times New Roman', serif;
 
   /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
-  --body-font-size-xs: 17px;
+  --body-font-size-m: 18px;
+  --body-font-size-s: 16px;
+  --body-font-size-xs: 14px;
 
   /* heading sizes */
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl: 44px;
-  --heading-font-size-l: 34px;
-  --heading-font-size-m: 27px;
-  --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
+  --heading-font-size-xxl: 48px;
+  --heading-font-size-xl: 38px;
+  --heading-font-size-l: 30px;
+  --heading-font-size-m: 24px;
+  --heading-font-size-s: 21px;
+  --heading-font-size-xs: 19px;
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 72px;
 }
 
 /* fallback fonts */
@@ -56,17 +64,17 @@
 @media (width >= 900px) {
   :root {
     /* body sizes */
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
+    --body-font-size-m: 17px;
+    --body-font-size-s: 15px;
     --body-font-size-xs: 14px;
 
     /* heading sizes */
-    --heading-font-size-xxl: 45px;
-    --heading-font-size-xl: 36px;
-    --heading-font-size-l: 28px;
-    --heading-font-size-m: 22px;
-    --heading-font-size-s: 20px;
-    --heading-font-size-xs: 18px;
+    --heading-font-size-xxl: 54px;
+    --heading-font-size-xl: 40px;
+    --heading-font-size-l: 31px;
+    --heading-font-size-m: 24px;
+    --heading-font-size-s: 21px;
+    --heading-font-size-xs: 19px;
   }
 }
 
@@ -77,7 +85,7 @@ body {
   color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 body.appear {
@@ -86,6 +94,11 @@ body.appear {
 
 header {
   height: var(--nav-height);
+}
+
+::selection {
+  background-color: var(--accent-light-color);
+  color: var(--heading-color);
 }
 
 header .header,
@@ -107,8 +120,8 @@ h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
-  font-weight: 600;
-  line-height: 1.25;
+  font-weight: 400;
+  line-height: 1.2;
   scroll-margin: 40px;
 }
 
@@ -125,8 +138,8 @@ ol,
 ul,
 pre,
 blockquote {
-  margin-top: 0.8em;
-  margin-bottom: 0.25em;
+  margin-top: 0.7em;
+  margin-bottom: 0.7em;
 }
 
 code,
@@ -136,14 +149,15 @@ pre {
 
 pre {
   padding: 16px;
-  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
   background-color: var(--light-color);
   overflow-x: auto;
   white-space: pre;
 }
 
 main > div {
-  margin: 40px 16px;
+  margin: 0;
 }
 
 input,
@@ -156,13 +170,21 @@ button {
 /* links */
 a:any-link {
   color: var(--link-color);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
   overflow-wrap: break-word;
+  transition: color 160ms ease;
 }
 
 a:hover {
   color: var(--link-hover-color);
-  text-decoration: underline;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--accent-color);
+  outline-offset: 3px;
 }
 
 /* buttons */
@@ -178,9 +200,9 @@ button.button {
   justify-content: center;
   max-width: 100%;
   margin: 0;
-  border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  padding: 0.7em 1.25em;
   font: inherit;
   font-weight: 500;
   line-height: 1.25;
@@ -189,6 +211,7 @@ button.button {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
 }
 
 a.button[aria-disabled="true"],
@@ -199,18 +222,19 @@ button.button:disabled {
 
 a.button.primary,
 button.button.primary {
-  border-color: var(--text-color);
-  background-color: var(--text-color);
-  color: var(--background-color);
+  border-color: var(--heading-color);
+  background-color: var(--heading-color);
+  color: var(--surface-color);
 }
 
 a.button.primary:hover,
 a.button.primary:focus-visible,
 button.button.primary:hover,
 button.button.primary:focus-visible {
-  border-color: var(--dark-color);
-  background-color: var(--dark-color);
-  color: var(--light-color);
+  border-color: var(--link-hover-color);
+  background-color: var(--link-hover-color);
+  color: var(--surface-color);
+  transform: translateY(-1px);
 }
 
 a.button.primary[aria-disabled="true"],
@@ -220,24 +244,25 @@ button.button.primary:disabled,
 button.button.primary:disabled:hover,
 button.button.primary:disabled:focus-visible {
   background-color: var(--light-color);
-  border-color: var(--light-color);
-  color: var(--dark-color);
+  border-color: var(--border-color);
+  color: var(--muted-text-color);
 }
 
 a.button.secondary,
 button.button.secondary {
-  border-color: var(--text-color);
+  border-color: var(--heading-color);
   background-color: transparent;
-  color: var(--text-color);
+  color: var(--heading-color);
 }
 
 a.button.secondary:hover,
 a.button.secondary:focus-visible,
 button.button.secondary:hover,
 button.button.secondary:focus-visible {
-  border-color: var(--dark-color);
+  border-color: var(--heading-color);
   background-color: var(--light-color);
-  color: var(--dark-color);
+  color: var(--heading-color);
+  transform: translateY(-1px);
 }
 
 a.button.secondary[aria-disabled="true"],
@@ -247,8 +272,8 @@ button.button.secondary:disabled,
 button.button.secondary:disabled:hover,
 button.button.secondary:disabled:focus-visible {
   background-color: var(--light-color);
-  border-color: var(--light-color);
-  color: var(--dark-color);
+  border-color: var(--border-color);
+  color: var(--muted-text-color);
 }
 
 /* high-impact call-to-action */
@@ -256,7 +281,7 @@ a.button.accent,
 button.button.accent {
   border-color: var(--link-color);
   background-color: var(--link-color);
-  color: var(--background-color);
+  color: var(--surface-color);
 }
 
 a.button.accent:hover,
@@ -265,6 +290,7 @@ button.button.accent:hover,
 button.button.accent:focus-visible {
   border-color: var(--link-hover-color);
   background-color: var(--link-hover-color);
+  transform: translateY(-1px);
 }
 
 a.button.accent[aria-disabled="true"],
@@ -274,14 +300,23 @@ button.button.accent:disabled,
 button.button.accent:disabled:hover,
 button.button.accent:disabled:focus-visible {
   background-color: var(--light-color);
-  border-color: var(--light-color);
-  color: var(--dark-color);
+  border-color: var(--border-color);
+  color: var(--muted-text-color);
 }
 
 main img {
   max-width: 100%;
   width: auto;
   height: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 .icon {
@@ -297,29 +332,229 @@ main img {
 
 /* sections */
 main > .section {
-  margin: 40px 0;
+  margin: 0;
+  padding: 72px 0;
 }
 
 main > .section > div {
-  max-width: 1200px;
-  margin: auto;
-  padding: 0 24px;
+  box-sizing: border-box;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+main > .section:nth-child(4) > div {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px 36px;
+}
+
+main > .section:nth-child(4) h3 {
+  grid-column: 1 / -1;
+}
+
+main > .section:nth-child(4) p {
+  margin: 0;
+  border-top: 1px solid var(--border-color);
+  padding-top: 18px;
+  color: var(--muted-text-color);
+}
+
+main > .section:nth-child(4) p strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--heading-color);
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-m);
+  font-weight: 400;
 }
 
 main > .section:first-of-type {
   margin-top: 0;
+  padding: 104px 0 112px;
+  border-bottom: 1px solid var(--border-color);
+  background: linear-gradient(135deg, #fcf9f2 0%, #f1e4d0 100%);
 }
 
-@media (width >= 900px) {
-  main > .section > div {
-    padding: 0 32px;
-  }
+main > .section:first-of-type > div {
+  max-width: 900px;
+  text-align: center;
 }
 
-/* section metadata */
+main > .section:first-of-type h3 {
+  margin: 0 0 22px;
+  color: var(--accent-color);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-xs);
+  font-weight: 700;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+main > .section:first-of-type h4 {
+  max-width: 780px;
+  margin: 0 auto 20px;
+  color: var(--heading-color);
+  font-size: var(--heading-font-size-xxl);
+  line-height: 1.08;
+}
+
+main > .section:first-of-type p:first-of-type {
+  margin: 0 auto 16px;
+  color: var(--heading-color);
+  font-size: var(--heading-font-size-s);
+  line-height: 1.45;
+}
+
+main > .section:first-of-type p:nth-of-type(2) {
+  max-width: 700px;
+  margin: 0 auto 26px;
+  color: var(--muted-text-color);
+}
+
+main > .section:first-of-type p:last-child strong {
+  color: var(--link-color);
+  font-weight: 700;
+}
+
+main > .section:nth-child(2) {
+  background-color: var(--light-color);
+}
+
+main > .section:nth-child(2) > div,
+main > .section:nth-child(3) > div,
+main > .section:nth-child(9) > div {
+  max-width: 840px;
+  text-align: center;
+}
+
+main > .section:nth-child(2) p:first-of-type {
+  color: var(--heading-color);
+  font-size: var(--heading-font-size-s);
+  line-height: 1.65;
+}
+
+main > .section:nth-child(2) p:last-child {
+  max-width: 680px;
+  margin: 28px auto 0;
+  border-top: 1px solid #cbb997;
+  padding-top: 24px;
+  color: var(--heading-color);
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-m);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+main > .section:nth-child(3) p:last-child strong {
+  color: var(--link-color);
+}
+
+main > .section:nth-child(9) {
+  background-color: var(--light-color);
+}
+
+main > .section:nth-child(9) p:first-of-type {
+  color: var(--heading-color);
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-m);
+  line-height: 1.55;
+}
+
+main > .section:nth-child(9) p:last-child strong {
+  color: var(--link-color);
+}
+
+main > .section:nth-child(10) {
+  background-color: var(--heading-color);
+  color: var(--footer-text-color);
+}
+
+main > .section:nth-child(10) > div {
+  max-width: 860px;
+  text-align: center;
+}
+
+main > .section:nth-child(10) h3 {
+  color: var(--footer-text-color);
+}
+
+main > .section:nth-child(10) p:last-of-type strong {
+  color: var(--accent-light-color);
+}
+
+main > .section:nth-child(n+5):nth-child(-n+8) {
+  padding: 42px 0;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--surface-color);
+}
+
+main > .section:nth-child(n+5):nth-child(-n+8) > div {
+  max-width: 680px;
+  text-align: center;
+}
+
+main > .section:nth-child(n+5):nth-child(-n+8) h3 {
+  margin: 0 0 16px;
+}
+
+main > .section:nth-child(n+5):nth-child(-n+8) h4 {
+  margin: 0 0 16px;
+  color: var(--heading-color);
+  font-size: var(--heading-font-size-m);
+}
+
+main > .section:nth-child(n+5):nth-child(-n+8) p {
+  color: var(--muted-text-color);
+}
+
+main > .section:nth-child(n+5):nth-child(-n+8) p:last-child strong {
+  color: var(--link-color);
+}
+
 main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
-  padding: 40px 0;
+}
+
+@media (width >= 900px) {
+  main > .section > div {
+    padding: 0 36px;
+  }
+}
+
+@media (width <= 700px) {
+  :root {
+    --nav-height: 64px;
+    --heading-font-size-xxl: 40px;
+    --heading-font-size-xl: 32px;
+    --heading-font-size-l: 26px;
+    --heading-font-size-m: 22px;
+  }
+
+  main > .section {
+    padding: 56px 0;
+  }
+
+  main > .section > div {
+    padding: 0 22px;
+  }
+
+  main > .section:first-of-type {
+    padding: 76px 0 82px;
+  }
+
+  main > .section:first-of-type h4 {
+    line-height: 1.12;
+  }
+
+  main > .section:nth-child(4) > div {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  main > .section:nth-child(n+5):nth-child(-n+8) {
+    padding: 34px 0;
+  }
 }

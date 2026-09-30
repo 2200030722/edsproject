@@ -8,12 +8,21 @@
 }
 
 .cards > ul > li {
-  border: 1px solid #dadada;
-  background-color: var(--background-color);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  background-color: var(--surface-color);
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.cards > ul > li:hover {
+  transform: translateY(-2px);
+  border-color: #c7ad87;
+  box-shadow: 0 12px 28px rgb(57 39 41 / 9%);
 }
 
 .cards .cards-card-body {
-  margin: 16px;
+  margin: 20px;
 }
 
 .cards .cards-card-image {
@@ -24,4 +33,14 @@
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cards > ul > li {
+    transition: none;
+  }
+
+  .cards > ul > li:hover {
+    transform: none;
+  }
 }

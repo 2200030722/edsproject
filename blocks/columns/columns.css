@@ -1,6 +1,7 @@
 .columns > div {
   display: flex;
   flex-direction: column;
+  gap: 28px;
 }
 
 .columns img {
@@ -17,13 +18,14 @@
 
 .columns > div > .columns-img-col img {
   display: block;
+  border-radius: 3px;
 }
 
 @media (width >= 900px) {
   .columns > div {
     align-items: center;
     flex-direction: unset;
-    gap: 24px;
+    gap: 48px;
   }
 
   .columns > div > div {
