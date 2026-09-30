@@ -2,7 +2,7 @@ import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // media query match that indicates mobile/tablet width
-const isDesktop = window.matchMedia('(min-width: 900px)');
+const isDesktop = window.matchMedia('(min-width: 1100px)');
 
 /**
  * Closes the open nav dropdown (desktop) or the nav menu (mobile) on Escape
@@ -85,6 +85,41 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 }
 
 /**
+ * Splits a simple authored nav fragment into its existing brand, links, and CTA content.
+ * @param {Element} nav The navigation element
+ */
+function decoratePlainNav(nav) {
+  const source = nav.querySelector(':scope > .nav-brand');
+  const code = source?.querySelector(':scope > .default-content-wrapper code');
+  if (!code || nav.querySelector('.nav-sections')) return;
+
+  const groups = code.textContent.match(/^(\S+\s+\S+\s+\S+)(\s+.*?)(\s+\[[^\]]+\])$/);
+  if (!groups) return;
+
+  const [, brandText, sectionText, ctaText] = groups;
+  const brand = document.createElement('span');
+  brand.className = 'nav-brand';
+  brand.textContent = brandText;
+
+  const sections = document.createElement('div');
+  sections.className = 'nav-sections';
+  const linkLabels = document.createElement('span');
+  linkLabels.className = 'nav-link-labels';
+  linkLabels.textContent = sectionText;
+  sections.append(linkLabels);
+
+  const tools = document.createElement('div');
+  tools.className = 'nav-tools';
+  const cta = document.createElement('span');
+  cta.className = 'nav-cta';
+  cta.textContent = ctaText;
+  tools.append(cta);
+
+  source.remove();
+  nav.append(brand, sections, tools);
+}
+
+/**
  * loads and decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
@@ -106,8 +141,10 @@ export default async function decorate(block) {
     if (section) section.classList.add(`nav-${c}`);
   });
 
+  decoratePlainNav(nav);
+
   const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand.querySelector('.button');
+  const brandLink = navBrand?.querySelector('.button');
   if (brandLink) {
     brandLink.className = '';
     brandLink.closest('.button-container').className = '';
